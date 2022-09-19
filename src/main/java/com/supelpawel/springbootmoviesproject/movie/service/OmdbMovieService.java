@@ -23,7 +23,7 @@ import reactor.core.publisher.Mono;
 @Service
 @Data
 @AllArgsConstructor
-public class MovieServiceImpl implements MovieService {
+public class OmdbMovieService implements MovieService {
 
   public static final int NUMBER_OF_TOP_MOVIES = 3;
   public static final String OMDB_API_KEY = "b1d18668";
@@ -41,8 +41,8 @@ public class MovieServiceImpl implements MovieService {
         .queryParam("y", year)
         .build()
     );
-    Mono<Movie> movie = uriSpec.exchangeToMono(response -> response.bodyToMono(Movie.class));
-    Movie returnMovie = movie.block();
+    Mono<Movie> movieResponse = uriSpec.exchangeToMono(response -> response.bodyToMono(Movie.class));
+    Movie returnMovie = movieResponse.block();
 
     Optional.ofNullable(returnMovie.getTitle())
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
