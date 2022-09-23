@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Movie database</title>
+    <title>The movie database</title>
 </head>
 <body>
 <h1>Welcome to the movie database</h1>
