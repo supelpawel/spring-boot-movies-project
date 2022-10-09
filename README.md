@@ -8,6 +8,7 @@ The project is created with:
 * Java 11
 * Maven
 * Spring Boot
+* Spring Data
 * Spring Security
 * MySQL
 * BCrypt
