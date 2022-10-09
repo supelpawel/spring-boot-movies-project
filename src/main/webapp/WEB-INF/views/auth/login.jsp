@@ -12,7 +12,7 @@
 
 <h1>Login page</h1>
 <form method="post">
-    <div><label> Username : <input type="text" name="username"/> </label></div>
+    <div><label> Username: <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="Log in"/></div>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -42,7 +42,7 @@
     <a href="/movie/search">Search movie</a>
 </p>
 <p>
-    <a href="/movie/favourite">Favourite movies list</a>
+    <a href="/movie/favourite-list">Favourite movies list</a>
 </p>
 </body>
 </html>

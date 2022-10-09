@@ -1,6 +1,6 @@
 package com.supelpawel.user.model;
 
-import com.supelpawel.movie.dto.MovieDto;
+import com.supelpawel.movie.model.Movie;
 import com.supelpawel.role.data.Role;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public class User {
   private String password;
   private boolean enabled;
   @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-  private List<MovieDto> favouriteMovies = new ArrayList<>();
+  private List<Movie> favouriteMovies = new ArrayList<>();
   @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
   @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -55,4 +55,3 @@ public class User {
         '}';
   }
 }
-

@@ -35,7 +35,11 @@
             <td>${movie.genre}</td>
             <td>${movie.director}</td>
             <td><img src="${movie.poster}" alt="movie poster"></td>
-            <td><a href="/movie/delete/${movie.id}">Delete the movie from favourite movies list</a>
+            <td>
+                <form action="/movie/delete" method="post">
+                    <input type="hidden" name="id" value="${movie.id}">
+                    <input type="submit" value="Delete the movie from favourite movies list">
+                </form>
             </td>
         </tr>
     </c:forEach>

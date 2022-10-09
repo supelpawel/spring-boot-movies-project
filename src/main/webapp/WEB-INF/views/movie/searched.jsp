@@ -32,7 +32,12 @@
         <td>${movie.genre}</td>
         <td>${movie.director}</td>
         <td><img src="${movie.poster}" alt="movie poster"></td>
-        <td><a href="/movie/favourite/${movie.title}/${movie.year}">Add to the favourite movies</a>
+        <td>
+            <form action="/movie/favourite" method="post">
+                <input type="hidden" name="title" value="${movie.title}">
+                <input type="hidden" name="year" value="${movie.year}">
+                <input type="submit" value="Add to the favourite movies">
+            </form>
         </td>
     </tr>
 </table>
@@ -40,7 +45,7 @@
     <a href="/movie/search">Search a movie</a>
 </p>
 <p>
-    <a href="/movie/favourite">Favourite movies</a>
+    <a href="/movie/favourite-list">Favourite movies</a>
 </p>
 <p>
     <a href="/movie/top3">TOP 3</a>

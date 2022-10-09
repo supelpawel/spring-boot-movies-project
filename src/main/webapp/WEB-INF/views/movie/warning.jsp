@@ -21,7 +21,7 @@
     <a href="/movie/search">Search a movie</a>
 </p>
 <p>
-    <a href="/movie/favourite">Favourite movies</a>
+    <a href="/movie/favourite-list">Favourite movies</a>
 </p>
 <p>
     <a href="/movie/top3">TOP 3</a>

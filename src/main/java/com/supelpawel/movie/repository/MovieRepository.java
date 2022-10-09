@@ -1,15 +1,15 @@
 package com.supelpawel.movie.repository;
 
-import com.supelpawel.movie.dto.MovieDto;
+import com.supelpawel.movie.model.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface MovieRepository extends JpaRepository<MovieDto, Long> {
+public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-  @Query(value = "SELECT md FROM MovieDto md ORDER BY md.users.size DESC")
-  List<MovieDto> findTopMovies();
+  @Query(value = "SELECT m FROM Movie m ORDER BY m.users.size DESC")
+  List<Movie> findTopMovies();
 
-  MovieDto findMovieByTitle(String title);
+  Movie findMovieByTitle(String title);
 }

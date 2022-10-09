@@ -1,44 +1,49 @@
 package com.supelpawel.movie.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.OneToMany;
+import com.supelpawel.movie.dto.MovieResponseDto;
+import com.supelpawel.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "movies")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonFormat(with = JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
 public class Movie {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
   private String title;
-  private int year;
-  private String rated;
-  private String released;
-  private String runtime;
+  private String plot;
   private String genre;
   private String director;
-  private String writer;
-  private String actors;
-  private String plot;
-  private String language;
-  private String country;
-  private String awards;
+  private int year;
   private String poster;
-  @OneToMany
-  private List<Rating> ratings = new ArrayList<>();
-  private String metaScore;
-  private String imdbRating;
-  private String imdbVotes;
-  private String imbdId;
-  private String type;
-  private String dvd;
-  private String production;
-  private String website;
-  private String response;
+  @ManyToMany(fetch = FetchType.EAGER)
+  private List<User> users = new ArrayList<>();
+
+  public static Movie from(MovieResponseDto movieResponseDto) {
+    Movie movieDto = new Movie();
+
+    movieDto.setTitle(movieResponseDto.getTitle());
+    movieDto.setPlot(movieResponseDto.getPlot());
+    movieDto.setGenre(movieResponseDto.getGenre());
+    movieDto.setDirector(movieResponseDto.getDirector());
+    movieDto.setYear(movieResponseDto.getYear());
+    movieDto.setPoster(movieResponseDto.getPoster());
+    return movieDto;
+  }
 }

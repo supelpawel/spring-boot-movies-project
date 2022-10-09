@@ -2,16 +2,14 @@ package com.supelpawel.movie.controller;
 
 import com.supelpawel.movie.service.MovieService;
 import com.supelpawel.user.model.CurrentUser;
+import java.io.IOException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.io.IOException;
 
 @Controller
 @AllArgsConstructor
@@ -20,30 +18,31 @@ public class MovieController {
   private final MovieService movieService;
 
   @GetMapping("/movie/search")
-  public String searchMovieForm() {
+  public String showSearchMovieForm() {
     return "movie/search";
   }
 
   @PostMapping("/movie/search")
-  public String processFindMovieForm(@RequestParam String title, @RequestParam int year,
+  public String processSearchMovieForm(@RequestParam String title, @RequestParam int year,
       Model model) throws IOException, InterruptedException {
-    return movieService.processFindMovieForm(title, year, model);
+    return movieService.processSearchMovieForm(title, year, model);
   }
 
-  @GetMapping("/movie/favourite/{title}/{year}")
-  String addMovieToFavouriteList(@PathVariable String title, @PathVariable int year,
+  @PostMapping("/movie/favourite")
+  String addMovieToFavouriteList(@RequestParam String title, @RequestParam int year,
       @AuthenticationPrincipal CurrentUser currentUser,
       Model model) throws IOException, InterruptedException {
     return movieService.addMovieToFavouriteList(title, year, currentUser, model);
   }
 
-  @GetMapping("/movie/favourite")
+  @GetMapping("/movie/favourite-list")
   String showFavouriteMovieList(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
     return movieService.showFavouriteMovieList(currentUser, model);
   }
 
-  @GetMapping("/movie/delete/{id}")
-  String deleteMovie(@AuthenticationPrincipal CurrentUser currentUser, @PathVariable int id) {
+  @PostMapping("/movie/delete")
+  String deleteMovieFromFavouriteList(@AuthenticationPrincipal CurrentUser currentUser,
+      @RequestParam int id) {
     return movieService.deleteMovieFromFavouriteList(currentUser, id);
   }
 
@@ -52,4 +51,3 @@ public class MovieController {
     return movieService.findTop3FavouriteMovies(model);
   }
 }
-
